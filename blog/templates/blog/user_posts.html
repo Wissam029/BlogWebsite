@@ -1,0 +1,36 @@
+{% extends 'blog/master.html' %}
+
+{% block content %}
+<h2>User: {{ user.username }}</h2>
+<p><strong>Email:</strong> {{ user.email }}</p>
+
+<hr>
+
+<h3>Blog Posts</h3>
+{% if posts %}
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="/blog/{{ post.id }}/">{{ post.title }}</a> - {{ post.date_published|date:"Y-m-d" }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>This user has not written any blog posts yet.</p>
+{% endif %}
+
+<hr>
+
+<h3>Comments</h3>
+{% if comments %}
+    <ul>
+        {% for comment in comments %}
+            <li>
+                On post ID {{ comment.post.id }}: "{{ comment.content }}"
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>This user has not written any comments yet.</p>
+{% endif %}
+{% endblock %}
